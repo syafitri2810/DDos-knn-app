@@ -538,21 +538,14 @@ if page == "Dashboard":
                 textfont=dict(color=CREAM, family="Inter", size=12),
                 hovertemplate="<b>%{x}</b><br>%{y:,} records<extra></extra>",
             ))
-            layout_bar = plotly_layout("Record Count by Class", height=320)
-            layout_bar["bargap"] = 0.35
-            layout_bar["yaxis"].update(dict(
-                showgrid=True,
-                gridcolor=GRID_COLOR,
-                linecolor=GRID_COLOR,
-                tickformat=",",
-                color=TEXT_COLOR
-            ))
-            layout_bar["xaxis"].update(dict(
-                linecolor=GRID_COLOR,
-                color=CREAM,
-                tickfont=dict(size=13, family="Inter", color=CREAM)
-            ))
-            fig_bar.update_layout(**layout_bar)
+            fig_bar.update_layout(
+                **plotly_layout("Record Count by Class", height=320),
+                bargap=0.35,
+                yaxis=dict(showgrid=True, gridcolor=GRID_COLOR, linecolor=GRID_COLOR,
+                           tickformat=",", color=TEXT_COLOR),
+                xaxis=dict(linecolor=GRID_COLOR, color=CREAM,
+                           tickfont=dict(size=13, family="Inter", color=CREAM)),
+            )
             st.plotly_chart(fig_bar, use_container_width=True, config={"displayModeBar": False})
 
     else:
@@ -941,22 +934,13 @@ elif page == "Detection Result":
                 opacity=0.9,
                 hovertemplate="%{x} Predicted: %{y:,}<extra></extra>",
             ))
-            layout_fig2 = plotly_layout("Actual vs Predicted", height=300)
-            layout_fig2["barmode"] = "group"
-            layout_fig2["bargap"] = 0.25
-            layout_fig2["bargroupgap"] = 0.05
-            layout_fig2["legend"] = LEGEND_H
-            layout_fig2["yaxis"].update(dict(
-                showgrid=True,
-                gridcolor=GRID_COLOR,
-                tickformat=",",
-                color=TEXT_COLOR
-            ))
-            layout_fig2["xaxis"].update(dict(
-                color=CREAM,
-                tickfont=dict(size=12, family="Inter", color=CREAM)
-            ))
-            fig2.update_layout(**layout_fig2)
+            fig2.update_layout(
+                **plotly_layout("Actual vs Predicted", height=300),
+                barmode="group", bargap=0.25, bargroupgap=0.05,
+                yaxis=dict(showgrid=True, gridcolor=GRID_COLOR, tickformat=",", color=TEXT_COLOR),
+                xaxis=dict(color=CREAM, tickfont=dict(size=12, family="Inter", color=CREAM)),
+                legend=LEGEND_H,
+            )
             st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
 
         with ch3:
@@ -978,17 +962,11 @@ elif page == "Detection Result":
                 showscale=False,
                 hovertemplate="%{y}<br>%{x}<br>Count: %{z}<extra></extra>",
             ))
-            layout_fig3 = plotly_layout("Confusion Matrix", height=300)
-            layout_fig3["xaxis"].update(dict(
-                side="bottom",
-                color=CREAM,
-                tickfont=dict(size=10, family="Inter", color=CREAM)
-            ))
-            layout_fig3["yaxis"].update(dict(
-                color=CREAM,
-                tickfont=dict(size=10, family="Inter", color=CREAM)
-            ))
-            fig3.update_layout(**layout_fig3)
+            fig3.update_layout(
+                **plotly_layout("Confusion Matrix", height=300),
+                xaxis=dict(side="bottom", color=CREAM, tickfont=dict(size=10, family="Inter", color=CREAM)),
+                yaxis=dict(color=CREAM, tickfont=dict(size=10, family="Inter", color=CREAM)),
+            )
             st.plotly_chart(fig3, use_container_width=True, config={"displayModeBar": False})
 
         st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
